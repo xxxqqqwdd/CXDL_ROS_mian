@@ -1,0 +1,10 @@
+
+<launch>
+
+    <rosparam command="load" file="$(find cx_driver)/config/cx_param.yaml"/>
+
+    <node pkg= "cx_driver" type="cx_driver_node" name="cx_driver_node" output="screen">
+
+    </node>    
+
+</launch>
