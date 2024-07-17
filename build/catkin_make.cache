@@ -1,2 +1,0 @@
-CXDL_ROS/cx_driver
--DCATKIN_DEVEL_PREFIX=/home/u/CXDL/code/git/CXDL_ROS_mian/devel -DCMAKE_INSTALL_PREFIX=/home/u/CXDL/code/git/CXDL_ROS_mian/install -G Unix Makefiles

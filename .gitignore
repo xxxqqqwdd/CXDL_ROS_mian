@@ -1,2 +1,4 @@
 //忽略生成文件
-CMakeLists.txt
+build/
+devel/
+

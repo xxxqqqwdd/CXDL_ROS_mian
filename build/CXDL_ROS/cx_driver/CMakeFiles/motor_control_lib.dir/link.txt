@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -O2 -g -DNDEBUG  -shared -Wl,-soname,libmotor_control_lib.so -o /home/u/CXDL/code/git/CXDL_ROS_mian/devel/lib/libmotor_control_lib.so CMakeFiles/motor_control_lib.dir/src/motor_control.cpp.o   -L/home/u/CXDL/code/git/CXDL_ROS_mian/src/CXDL_ROS/cx_driver/lib 
