@@ -1,0 +1,8 @@
+prefix=/home/u/CXDL/code/git/CXDL_ROS_mian/devel
+
+Name: cx_driver
+Description: Description of cx_driver
+Version: 0.0.0
+Cflags: -I/home/u/CXDL/code/git/CXDL_ROS_mian/devel/include
+Libs: -L${prefix}/lib 
+Requires: roscpp std_msgs message_runtime

@@ -1,0 +1,24 @@
+CAN :
+  frame_SDO_interval : 0.5
+  frame_PDO_interval : 0.5
+  sync_interval : 10
+
+
+motor :
+  evo :
+    acceleration : 4
+    P_MIN : -12.5
+    P_MAX : 12.5 
+    V_MIN : -10
+    V_MAX : 10
+    P_KP_MIN : 0
+    P_KP_MAX : 250
+    P_KD_MIN : 0
+    P_KD_MAX : 50
+    V_KP_MIN : 0
+    V_KP_MAX : 250
+    V_KD_MIN : 0
+    V_KD_MAX : 50
+    V_KI_MAX : 0.05
+    V_KI_MIN : 0
+

@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O2 -g -DNDEBUG  -shared -Wl,-soname,libcxdriver_lib.so -o /home/u/CXDL/code/git/CXDL_ROS_mian/devel/lib/libcxdriver_lib.so CMakeFiles/cxdriver_lib.dir/src/cxdriver.cpp.o   -L/home/u/CXDL/code/git/CXDL_ROS_mian/src/CXDL_ROS/cx_driver/lib 
