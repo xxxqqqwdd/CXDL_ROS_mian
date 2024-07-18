@@ -27,6 +27,7 @@ double CAN_frame_PDO_interval;
 
 
 //变量
+int m_run0;
 int count;
 BOOL is_sync_ok;
 BOOL is_evo_sdo_ok;

@@ -1,7 +1,7 @@
 CAN :
-  frame_SDO_interval : 0.5
-  frame_PDO_interval : 0.5
-  sync_interval : 10
+  frame_SDO_interval : 10
+  frame_PDO_interval : 10
+  sync_interval : 100
 
 
 motor :

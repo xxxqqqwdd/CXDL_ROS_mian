@@ -11,7 +11,7 @@ Frame::Frame(){
 	vci_can_obj.RemoteFlag=0;
 	vci_can_obj.ExternFlag=0;
 	vci_can_obj.DataLen=8;
-	for(int i;i<vci_can_obj.DataLen;i++)
+	for(int i=0;i<vci_can_obj.DataLen;i++)
 	{vci_can_obj.Data[i]=0x00;}
 };
 Frame::~Frame(){};

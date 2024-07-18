@@ -231,7 +231,7 @@ void init(ros::NodeHandle nh)
 
 
 void initCANConfig(ros::NodeHandle nh){
-
+	
 	VCI_BOARD_INFO pInfo;//用来获取设备信息。
 	VCI_BOARD_INFO pInfo1 [50];
 	int num=0;
@@ -239,7 +239,10 @@ void initCANConfig(ros::NodeHandle nh){
 	printf(">>USBCAN DEVICE NUM:");printf("%d", num);printf(" PCS");printf("\n");
 	if(VCI_OpenDevice(VCI_USBCAN2,0,0)==1)//打开设备
 	{
+		
 		printf(">>open deivce success!\n");//打开设备成功
+
+		
 	}else
 	{
 		printf(">>open deivce error!\n");
@@ -283,9 +286,9 @@ void initCANConfig(ros::NodeHandle nh){
 
 void initMotorConfig(ros::NodeHandle nh){
 
-// Motor_Vector =new std::vector<Motor>[12] ;
-// CAN_master = new Motor;
-//Motor::Motor(MotorType motortype,BYTE sdo_id,BYTE pdo_id,BYTE encoding_rate)
+
+
+
 Motor motor_zhuoyu_1(MotorType::ZHUOYU,0x601,0x201,20);
 Motor_Vector.push_back(motor_zhuoyu_1);
 Motor motor_zhuoyu_2(MotorType::ZHUOYU,0x602,0x202,20);
@@ -442,30 +445,30 @@ haokong_sdo.push_back(enable_id);
 
 for(int v_m = 0;v_m<Motor_Vector.size();v_m++)
 {
-if(v_m == 0||v_m == 1||v_m == 2||v_m == 6||v_m == 7||v_m == 8)
-{
-for(int sdo_row_i=0;sdo_row_i<=zhuoyu_sdo.size();sdo_row_i++){
-for(int j=0;j<=zhuoyu_sdo.at(sdo_row_i).size();j++)
-{
-if(sdo_row_i==2||sdo_row_i==8||sdo_row_i==9||sdo_row_i==16||sdo_row_i==17||sdo_row_i==22)
-{
-zhuoyu_sdo.at(sdo_row_i).at(5)=(v_m+1);
-Motor_Vector.at(v_m).setData(j,zhuoyu_sdo.at(sdo_row_i).at(j));
-}
-else
-{
-Motor_Vector.at(v_m).setData(j,zhuoyu_sdo.at(sdo_row_i).at(j));
-}
-}
-Motor_Vector.at(v_m).setID(Motor_Vector.at(v_m).getSdoID());
-Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
-}
-}
+	if(v_m == 0||v_m == 1||v_m == 2||v_m == 6||v_m == 7||v_m == 8)
+	{
+		for(int sdo_row_i=0;sdo_row_i<zhuoyu_sdo.size();sdo_row_i++){
+			for(int j=0;j<zhuoyu_sdo.at(sdo_row_i).size();j++)
+			{
+				if(sdo_row_i==2||sdo_row_i==8||sdo_row_i==9||sdo_row_i==16||sdo_row_i==17||sdo_row_i==22)
+				{
+				zhuoyu_sdo.at(sdo_row_i).at(5)=(v_m+1);
+				Motor_Vector.at(v_m).setData(j,zhuoyu_sdo.at(sdo_row_i).at(j));
+				}
+				else
+				{
+				Motor_Vector.at(v_m).setData(j,zhuoyu_sdo.at(sdo_row_i).at(j));
+			}
+			}
+		Motor_Vector.at(v_m).setID(Motor_Vector.at(v_m).getSdoID());
+		Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+		}
+	}
 
 if(v_m == 3||v_m == 5||v_m == 9||v_m == 11)
 {
-for(int sdo_row_i=0;sdo_row_i<=haokong_sdo.size();sdo_row_i++){
-for(int j=0;j<=haokong_sdo.at(sdo_row_i).size();j++)
+for(int sdo_row_i=0;sdo_row_i<haokong_sdo.size();sdo_row_i++){
+for(int j=0;j<haokong_sdo.at(sdo_row_i).size();j++)
 {
 if(sdo_row_i==2||sdo_row_i==8||sdo_row_i==9||sdo_row_i==16||sdo_row_i==17||sdo_row_i==22)
 {
@@ -547,7 +550,7 @@ return (int)((x - offset) * ((double)((1 << bits) - 1)) / span);
 
 void evo_motor_control(std::vector<double> evo_angle,std::vector<int> motor_evo_id)
 {
-	while(1)
+	// while(1)
 	{
 		if(!is_sync_ok)
 		{
@@ -585,14 +588,14 @@ void evo_motor_control(std::vector<double> evo_angle,std::vector<int> motor_evo_
 				is_sync_ok = true;
 			}
 
-			break;
+			// break;
 		}
 	}
 }
 
 void zhuoyu_motor_control(std::vector<double> zhuoyu_angle,std::vector<int> motor_zhuoyu_id)
 {
-	while(1)
+	// while(1)
 	{
 		if(!is_sync_ok)
 		{
@@ -614,14 +617,14 @@ void zhuoyu_motor_control(std::vector<double> zhuoyu_angle,std::vector<int> moto
 				is_sync_ok = true;
 			}
 
-			break;
+			// break;
 	}
 }
 }
 
 void haokong_motor_control(std::vector<double> haokong_angle,std::vector<int> motor_haokong_id)
 {
-	while(1)
+	// while(1)
 	{
 		if(!is_sync_ok)
 			{
@@ -645,7 +648,7 @@ void haokong_motor_control(std::vector<double> haokong_angle,std::vector<int> mo
 				is_sync_ok = true;
 			}
 
-			break;
+			// break;
 	}
 
 }

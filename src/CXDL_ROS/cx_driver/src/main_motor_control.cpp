@@ -64,9 +64,9 @@ int main(int argc,char *argv[])
 	//初始化电机
 	initMotorConfig(nh);
 	//初始化SDO/PDO
-    initCANOPENSdo(nh);
+    // initCANOPENSdo(nh);
 	//启动NMT
-	startNMT();
+	// startNMT();
 
 
 	CAN_sync_interval = nh.param("CAN/sync_interval",10)/1000;
@@ -77,13 +77,14 @@ int main(int argc,char *argv[])
 	sub_motor_status = nh.subscribe<std_msgs::Bool>("motor_status",10,motor_status_cb);
     
     
-    int m_run0=1;
+    m_run0=1;
 	pthread_t threadid;
 	int ret;
 	ret=pthread_create(&threadid,NULL,receive_func,&m_run0);
-
+	m_run0=0;
     ros::spin();
-
+	
+	std::cout<<"dddddddddddddd"<<std::endl;
     return 0;
 }
 
