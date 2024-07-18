@@ -12,6 +12,7 @@
 
 
 
+
 //#ROS收发
 ros::Publisher pub_frame_info ;
 ros::Subscriber sub_frame_info;
@@ -74,8 +75,7 @@ void motor_status_disable();
 
 
 //结构体
-
-std::vector<Motor> Motor_Vector ;
+std::vector<std::unique_ptr<Motor>> Motor_Vector;  
 Motor CAN_master ;
 
 std::vector<std::vector<BYTE>> zhuoyu_sdo;
@@ -89,5 +89,5 @@ std::vector<BYTE> evo_sdo_storage_id;
 /////////////////////
 
 
-
+int ii=0;
 #endif 

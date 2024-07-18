@@ -8,12 +8,13 @@
 
 
 
+
 void joint_angle_cb(const cx_driver::joint_angle::ConstPtr& msg_p){
 	std::vector<double> CAN_joint_Angle{msg_p->left_arm_joint.at(4),
 										msg_p->right_arm_joint.at(4)};
 	CAN_motor(CAN_joint_Angle);
 	std::vector<double> CANOPEN_joint_Angle{msg_p->left_arm_joint.at(0),
-										msg_p->left_arm_joint.at(1),
+									 	msg_p->left_arm_joint.at(1),
 										msg_p->left_arm_joint.at(2),
 										msg_p->left_arm_joint.at(3),
 										msg_p->left_arm_joint.at(5),
@@ -50,9 +51,9 @@ void motor_status_enable()
 		{
 			for(int j=0;j<=evo_enable.size();j++)
 			{
-				Motor_Vector.at(v_m).setData(j,evo_enable.at(j));
+				Motor_Vector.at(v_m).get()->setData(j,evo_enable.at(j));
 			}
-			Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+			Motor_Vector.at(v_m).get()->transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
 
 		}
 		else
@@ -61,36 +62,36 @@ void motor_status_enable()
 			{
 				for(int j=0;j<=zhuoyu_haokong_disable.size();j++)
 				{
-				Motor_Vector.at(v_m).setData(j,zhuoyu_haokong_disable.at(j));
+				Motor_Vector.at(v_m).get()->setData(j,zhuoyu_haokong_disable.at(j));
 				}
-				Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+				Motor_Vector.at(v_m).get()->transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
 
 				for(int j=0;j<=zhuoyu_haokong_enable.size();j++)
 				{
-				Motor_Vector.at(v_m).setData(j,zhuoyu_haokong_enable.at(j));
+				Motor_Vector.at(v_m).get()->setData(j,zhuoyu_haokong_enable.at(j));
 				}
-				Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+				Motor_Vector.at(v_m).get()->transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
 
 			}
 			else
 			{
 				for(int j=0;j<=zhuoyu_haokong_disable.size();j++)
 				{
-				Motor_Vector.at(v_m).setData(j,zhuoyu_haokong_disable.at(j));
+				Motor_Vector.at(v_m).get()->setData(j,zhuoyu_haokong_disable.at(j));
 				}
-				Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+				Motor_Vector.at(v_m).get()->transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
 
 				for(int j=0;j<=haokong_ready.size();j++)
 				{
-				Motor_Vector.at(v_m).setData(j,haokong_ready.at(j));
+				Motor_Vector.at(v_m).get()->setData(j,haokong_ready.at(j));
 				}
-				Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+				Motor_Vector.at(v_m).get()->transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
 
 				for(int j=0;j<=zhuoyu_haokong_enable.size();j++)
 				{
-				Motor_Vector.at(v_m).setData(j,zhuoyu_haokong_enable.at(j));
+				Motor_Vector.at(v_m).get()->setData(j,zhuoyu_haokong_enable.at(j));
 				}
-				Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+				Motor_Vector.at(v_m).get()->transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
 
 			}
 		}
@@ -109,18 +110,18 @@ void motor_status_disable()
 		{
 			for(int j=0;j<=evo_enable.size();j++)
 				{
-				Motor_Vector.at(v_m).setData(j,evo_enable.at(j));
+				Motor_Vector.at(v_m).get()->setData(j,evo_enable.at(j));
 				}
-				Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+				Motor_Vector.at(v_m).get()->transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
 
 		}
 		else
 		{
 			for(int j=0;j<=zhuoyu_haokong_disable.size();j++)
 				{
-				Motor_Vector.at(v_m).setData(j,zhuoyu_haokong_disable.at(j));
+				Motor_Vector.at(v_m).get()->setData(j,zhuoyu_haokong_disable.at(j));
 				}
-				Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+				Motor_Vector.at(v_m).get()->transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
 		}
 	}		
 }
@@ -288,40 +289,27 @@ void initMotorConfig(ros::NodeHandle nh){
 
 
 
-
-Motor motor_zhuoyu_1(MotorType::ZHUOYU,0x601,0x201,20);
-Motor_Vector.push_back(motor_zhuoyu_1);
-Motor motor_zhuoyu_2(MotorType::ZHUOYU,0x602,0x202,20);
-Motor_Vector.push_back(motor_zhuoyu_2);
-Motor motor_zhuoyu_3(MotorType::ZHUOYU,0x603,0x203,20);
-Motor_Vector.push_back(motor_zhuoyu_3);
-Motor motor_haokong_1(MotorType::HAOKONG,0x604,0x204,16);
-Motor_Vector.push_back(motor_haokong_1);
-Motor motor_evo_1(MotorType::EVO,0x005,0x005);
-Motor_Vector.push_back(motor_evo_1);
-Motor motor_haokong_2(MotorType::HAOKONG,0x606,0x206,16);
-Motor_Vector.push_back(motor_haokong_2);
-Motor motor_zhuoyu_4(MotorType::ZHUOYU,0x607,0x207,20);
-Motor_Vector.push_back(motor_zhuoyu_4);
-Motor motor_zhuoyu_5(MotorType::ZHUOYU,0x608,0x208,20);
-Motor_Vector.push_back(motor_zhuoyu_5);
-Motor motor_zhuoyu_6(MotorType::ZHUOYU,0x609,0x209,20);
-Motor_Vector.push_back(motor_zhuoyu_6);
-Motor motor_haokong_3(MotorType::HAOKONG,0x60A,0x20A,16);
-Motor_Vector.push_back(motor_haokong_3);
-Motor motor_evo_2(MotorType::EVO,0x00B,0x00B);
-Motor_Vector.push_back(motor_evo_2);
-Motor motor_haokong_4(MotorType::HAOKONG,0x60C,0x20C,16);
-Motor_Vector.push_back(motor_haokong_4);
+Motor_Vector.push_back(std::make_unique<Motor>(MotorType::ZHUOYU,0x601,0x201,20));  
+Motor_Vector.push_back(std::make_unique<Motor>(MotorType::ZHUOYU,0x602,0x202,20));  
+Motor_Vector.push_back(std::make_unique<Motor>(MotorType::ZHUOYU,0x603,0x203,20));  
+// Motor_Vector.emplace_back(std::make_unique<Motor>(MotorType::HAOKONG,0x604,0x204,16));  
+// Motor_Vector.emplace_back(std::make_unique<Motor>(MotorType::EVO,0x005,0x005));  
+// Motor_Vector.emplace_back(std::make_unique<Motor>(MotorType::HAOKONG,0x606,0x206,16));  
+// Motor_Vector.emplace_back(std::make_unique<Motor>(MotorType::ZHUOYU,0x607,0x207,20)); 
+// Motor_Vector.emplace_back(std::make_unique<Motor>(MotorType::ZHUOYU,0x608,0x208,20));  
+// Motor_Vector.emplace_back(std::make_unique<Motor>(MotorType::ZHUOYU,0x609,0x209,20));  
+// Motor_Vector.emplace_back(std::make_unique<Motor>(MotorType::HAOKONG,0x60A,0x20A,16));  
+// Motor_Vector.emplace_back(std::make_unique<Motor>(MotorType::EVO,0x00B,0x00B));  
+// Motor_Vector.emplace_back(std::make_unique<Motor>(MotorType::HAOKONG,0x60C,0x20C,16));  
 
 
 //CAN
-nh.param("CAN/frame_SDO_interval",CAN_frame_SDO_interval);
-nh.param("CAN/frame_PDO_interval",CAN_frame_PDO_interval);
-nh.param("CAN/sync_interval",CAN_sync_interval);
+nh.getParam("/CAN/frame_SDO_interval",CAN_frame_SDO_interval);
+nh.getParam("/CAN/frame_PDO_interval",CAN_frame_PDO_interval);
+nh.getParam("/CAN/sync_interval",CAN_sync_interval);
 
-
-
+std::cout<<"xxxx"<<CAN_frame_SDO_interval<<std::endl;
+std::cout<<"xxxx"<<CAN_sync_interval<<std::endl;
 }
 
 
@@ -332,10 +320,10 @@ if(v_m == 4||v_m == 10)
 {
 continue;
 }
-Motor_Vector.at(v_m).setSendType(0);
-Motor_Vector.at(v_m).setRemoteFlag(0);
-Motor_Vector.at(v_m).setExternFlag(0);
-Motor_Vector.at(v_m).setDataLen(8);
+Motor_Vector.at(v_m).get()->setSendType(0);
+Motor_Vector.at(v_m).get()->setRemoteFlag(0);
+Motor_Vector.at(v_m).get()->setExternFlag(0);
+Motor_Vector.at(v_m).get()->setDataLen(8);
 }
 
 //循环位置模式帧
@@ -453,15 +441,21 @@ for(int v_m = 0;v_m<Motor_Vector.size();v_m++)
 				if(sdo_row_i==2||sdo_row_i==8||sdo_row_i==9||sdo_row_i==16||sdo_row_i==17||sdo_row_i==22)
 				{
 				zhuoyu_sdo.at(sdo_row_i).at(5)=(v_m+1);
-				Motor_Vector.at(v_m).setData(j,zhuoyu_sdo.at(sdo_row_i).at(j));
+				Motor_Vector.at(v_m).get()->setData(j,zhuoyu_sdo.at(sdo_row_i).at(j));
 				}
 				else
 				{
-				Motor_Vector.at(v_m).setData(j,zhuoyu_sdo.at(sdo_row_i).at(j));
+				Motor_Vector.at(v_m).get()->setData(j,zhuoyu_sdo.at(sdo_row_i).at(j));
+								
 			}
 			}
-		Motor_Vector.at(v_m).setID(Motor_Vector.at(v_m).getSdoID());
-		Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+			
+		Motor_Vector.at(v_m).get()->setID(Motor_Vector.at(v_m).get()->getSdoID());
+		// Motor_Vector.at(v_m).get()->transmit(VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
+		
+		// CAN_frame_SDO_interval*1000,
+		std::cout<<ii<<std::endl;
+		ii++;
 		}
 	}
 
@@ -473,19 +467,22 @@ for(int j=0;j<haokong_sdo.at(sdo_row_i).size();j++)
 if(sdo_row_i==2||sdo_row_i==8||sdo_row_i==9||sdo_row_i==16||sdo_row_i==17||sdo_row_i==22)
 {
 haokong_sdo.at(sdo_row_i).at(5)=(v_m+1);
-Motor_Vector.at(v_m).setData(j,haokong_sdo.at(sdo_row_i).at(j));
+Motor_Vector.at(v_m).get()->setData(j,haokong_sdo.at(sdo_row_i).at(j));
 }
 else
 {
-Motor_Vector.at(v_m).setData(j,haokong_sdo.at(sdo_row_i).at(j));
+Motor_Vector.at(v_m).get()->setData(j,haokong_sdo.at(sdo_row_i).at(j));
 }
 }
-Motor_Vector.at(v_m).setID(Motor_Vector.at(v_m).getSdoID());
-Motor_Vector.at(v_m).transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).getFrame(), 1);
+Motor_Vector.at(v_m).get()->setID(Motor_Vector.at(v_m).get()->getSdoID());
+// Motor_Vector.at(v_m).get()->transmit(VCI_USBCAN2, 0, 0, &Motor_Vector.at(v_m).get()->getFrame(), 1);
+// CAN_frame_SDO_interval*1000,
+std::cout<<ii<<std::endl;
+ii++;
 }
 }
 }
-
+ROS_INFO("pdo配置完成!!!");
 
 }
 
@@ -558,7 +555,7 @@ void evo_motor_control(std::vector<double> evo_angle,std::vector<int> motor_evo_
 			{
 			double v_i = 0.5*evo_acceleration*(CAN_sync_interval-sqrt(CAN_sync_interval*CAN_sync_interval-4*evo_angle.at(i_1)/evo_acceleration));
 
-			Motor_Vector.at(motor_evo_id.at(i_1)-1).setID(Motor_Vector.at(motor_evo_id.at(i_1)-1).getPdoID());
+			Motor_Vector.at(motor_evo_id.at(i_1)-1).get()->setID(Motor_Vector.at(motor_evo_id.at(i_1)-1).get()->getPdoID());
 
 			int P0 = double_to_unit(evo_angle.at(i_1), P_MIN, P_MAX, 16);
 			int V0 = double_to_unit(v_i, V_MIN, V_MAX, 8);
@@ -600,7 +597,7 @@ void zhuoyu_motor_control(std::vector<double> zhuoyu_angle,std::vector<int> moto
 		if(!is_sync_ok)
 		{
 			for(int i_1 = 0;i_1<zhuoyu_angle.size();i_1++){
-				_Float32 dpi = pow(2, Motor_Vector.at(motor_zhuoyu_id.at(i_1)-1).getEncodingRate())/ (2*M_PI);
+				_Float32 dpi = pow(2, Motor_Vector.at(motor_zhuoyu_id.at(i_1)-1).get()->getEncodingRate())/ (2*M_PI);
 				int result = dpi *zhuoyu_angle.at(i_1);
 				BYTE d1=(result&0xff);
 				BYTE d2=(result>>8);
@@ -629,7 +626,7 @@ void haokong_motor_control(std::vector<double> haokong_angle,std::vector<int> mo
 		if(!is_sync_ok)
 			{
 			for(int i_1 = 0;i_1<haokong_angle.size();i_1++){
-				_Float32 dpi = pow(2, Motor_Vector.at(motor_haokong_id.at(i_1)-1).getEncodingRate())/ (2*M_PI);
+				_Float32 dpi = pow(2, Motor_Vector.at(motor_haokong_id.at(i_1)-1).get()->getEncodingRate())/ (2*M_PI);
 				int result = dpi *haokong_angle.at(i_1);
 				BYTE d1=(result&0xff);
 				BYTE d2=(result>>8);

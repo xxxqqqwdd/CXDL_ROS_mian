@@ -8,6 +8,7 @@
 #include "std_msgs/Float64.h"
 #include "cx_driver/joint_angle.h"
 
+
 #define BYTE unsigned char
 
 
@@ -60,13 +61,14 @@ int main(int argc,char *argv[])
 	//程序初始化
 	init(nh);
 	//初始化CAN卡
-    initCANConfig(nh);
+    // initCANConfig(nh);
 	//初始化电机
 	initMotorConfig(nh);
 	//初始化SDO/PDO
     // initCANOPENSdo(nh);
 	//启动NMT
 	// startNMT();
+	
 
 
 	CAN_sync_interval = nh.param("CAN/sync_interval",10)/1000;
