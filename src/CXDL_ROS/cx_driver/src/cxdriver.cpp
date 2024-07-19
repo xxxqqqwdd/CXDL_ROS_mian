@@ -50,11 +50,9 @@ Motor::Motor(MotorType motortype,int sdo_id,int pdo_id,int encoding_rate){
 	PDO_ID_2=pdo_id+0x100;
 	Encoding_rate=encoding_rate;
 }
-Motor::Motor(MotorType motortype,int sdo_id,int pdo_id){
+Motor::Motor(MotorType motortype,int sdo_id){
 	Motortype=motortype;
 	SDO_ID=sdo_id;
-	PDO_ID_1=pdo_id;
-	PDO_ID_2=pdo_id+0x100;
 }
 Motor::~Motor(){}
 void Motor::setSdoID(int sdo_id){SDO_ID = sdo_id;}

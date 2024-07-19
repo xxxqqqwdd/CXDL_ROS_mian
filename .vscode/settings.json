@@ -90,6 +90,11 @@
         "vec4ub": "cpp",
         "vec4ui": "cpp",
         "vec4us": "cpp",
-        "fast_back_stack": "cpp"
+        "fast_back_stack": "cpp",
+        "matrixd": "cpp",
+        "matrixf": "cpp",
+        "state": "cpp",
+        "observer_ptr": "cpp",
+        "ref_ptr": "cpp"
     }
 }

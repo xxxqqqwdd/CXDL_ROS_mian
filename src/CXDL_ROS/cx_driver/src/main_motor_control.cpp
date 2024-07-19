@@ -61,13 +61,13 @@ int main(int argc,char *argv[])
 	//程序初始化
 	init(nh);
 	//初始化CAN卡
-    // initCANConfig(nh);
+    initCANConfig(nh);
 	//初始化电机
 	initMotorConfig(nh);
 	//初始化SDO/PDO
-    // initCANOPENSdo(nh);
+    initCANOPENSdo(nh);
 	//启动NMT
-	// startNMT();
+	startNMT();
 	
 
 
@@ -82,9 +82,9 @@ int main(int argc,char *argv[])
     m_run0=1;
 	pthread_t threadid;
 	int ret;
-	ret=pthread_create(&threadid,NULL,receive_func,&m_run0);
+	// ret=pthread_create(&threadid,NULL,receive_func,&m_run0);
 	m_run0=0;
-    ros::spin();
+    // ros::spin();
 	
 	std::cout<<"dddddddddddddd"<<std::endl;
     return 0;

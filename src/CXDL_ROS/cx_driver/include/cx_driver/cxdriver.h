@@ -37,7 +37,7 @@ class Motor : public Frame
     public:
         Motor();
         Motor(MotorType motortype,int sdo_id,int pdo_id,int encoding_rate);
-        Motor(MotorType motortype,int sdo_id,int pdo_id);
+        Motor(MotorType motortype,int sdo_id);
         ~Motor();
         void setSdoID(int sdo_id);
         int getSdoID();

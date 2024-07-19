@@ -75,11 +75,12 @@ void motor_status_disable();
 
 
 //结构体
-std::vector<std::unique_ptr<Motor>> Motor_Vector;  
+// std::vector<std::unique_ptr<Motor>> Motor_Vector;  
+Motor Motor_Vector[12];
 Motor CAN_master ;
 
-std::vector<std::vector<BYTE>> zhuoyu_sdo;
-std::vector<std::vector<BYTE>> haokong_sdo;
+std::vector<BYTE*> zhuoyu_sdo;
+std::vector<std::vector<BYTE>*> haokong_sdo;
 
 std::vector<std::vector<BYTE>> all_pdo_storage;
 std::vector<BYTE> all_pdo_storage_id;
