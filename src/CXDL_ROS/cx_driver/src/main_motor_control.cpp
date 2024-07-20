@@ -71,8 +71,8 @@ int main(int argc,char *argv[])
 	
 
 
-	CAN_sync_interval = nh.param("CAN/sync_interval",10)/1000;
-    ros::Timer State_Timer = nh.createTimer(ros::Duration(CAN_sync_interval), motor_timer_callback);
+	
+    ros::Timer State_Timer = nh.createTimer(ros::Duration(CAN_sync_interval/1000), motor_timer_callback);
 
     pub_frame_info= nh.advertise<cx_driver::motor_info>("motor_frame_info",10);
     sub_frame_info = nh.subscribe<cx_driver::joint_angle>("joint_angle",10,joint_angle_cb);
@@ -82,11 +82,13 @@ int main(int argc,char *argv[])
     m_run0=1;
 	pthread_t threadid;
 	int ret;
-	// ret=pthread_create(&threadid,NULL,receive_func,&m_run0);
-	m_run0=0;
-    // ros::spin();
+	ret=pthread_create(&threadid,NULL,receive_func,&m_run0);
 	
+    ros::spin();
+	m_run0=0;
+	disableNMT();
 	std::cout<<"dddddddddddddd"<<std::endl;
+	usleep(10000);
     return 0;
 }
 
