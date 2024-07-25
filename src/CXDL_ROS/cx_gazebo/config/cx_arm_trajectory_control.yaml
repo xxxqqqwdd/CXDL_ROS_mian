@@ -1,0 +1,31 @@
+cx_arm:
+  arm_joint_controller:
+    type: "position_controllers/JointTrajectoryController"
+    joints:
+      - joint101
+      - joint102
+      - joint103
+      - joint104
+      - joint105
+      - joint106
+      - joint201
+      - joint202
+      - joint203
+      - joint204
+      - joint205
+      - joint206
+
+    gains:
+      joint101:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint102:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint103:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint104:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint105:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint106:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint201:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint202:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint203:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint204:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint205:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint206:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+

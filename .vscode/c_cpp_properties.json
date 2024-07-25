@@ -9,7 +9,8 @@
         "/home/u/CXDL/code/git/CXDL_ROS_mian/devel/include/**",
         "/opt/ros/noetic/include/**",
         "/home/u/CXDL/code/git/CXDL_ROS_mian/src/CXDL_ROS/cx_driver/include/**",
-        "/usr/include/**"
+        "/usr/include/**",
+        "/home/u/CXDL/code/git/CXDL_ROS_main/src/CXDL_ROS/cx_mujoco_cpp_driver/include/**"
       ],
       "name": "ROS",
       "intelliSenseMode": "gcc-x64",
