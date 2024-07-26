@@ -1,4 +1,4 @@
-cx_arm:
+arm:
   arm_joint_controller:
     type: "position_controllers/JointTrajectoryController"
     joints:
@@ -16,16 +16,16 @@ cx_arm:
       - joint206
 
     gains:
-      joint101:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint102:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint103:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint104:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint105:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint106:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint201:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint202:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint203:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint204:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint205:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
-      joint206:   {p: 1000.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint101:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint102:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint103:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint104:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint105:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint106:   {p: 1.0, i: 0.0, d: 0, i_clamp: 0.0}
+      joint201:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint203:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint204:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint205:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint206:   {p: 1.0, i: 0.0, d: 0, i_clamp: 0.0}
+
 

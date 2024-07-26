@@ -1,0 +1,14 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/u/CXDL/code/git/CXDL_ROS_main/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/opt/openrobots/lib/python3.8/site-packages",
+        "/home/u/3_my_lib/raisimLib/raisim/linux/lib"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/u/CXDL/code/git/CXDL_ROS_main/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/opt/openrobots/lib/python3.8/site-packages",
+        "/home/u/3_my_lib/raisimLib/raisim/linux/lib"
+    ]
+}

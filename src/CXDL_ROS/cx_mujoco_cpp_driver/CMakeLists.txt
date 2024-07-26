@@ -126,6 +126,15 @@ link_directories(
 
 
 ## Declare a C++ library
+add_library(cxmujoco_lib
+  src/mujoco_driver.cpp
+  include/cx_mujoco_cpp_driver/mujoco_driver.h
+)
+
+
+
+
+## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/cx_mujoco_cpp_driver.cpp
 # )
@@ -165,6 +174,14 @@ target_link_libraries(mujoco_driver_node
 target_link_libraries(mujoco_driver_node
   ${catkin_LIBRARIES}
   mujoco
+
+)
+
+
+
+target_link_libraries(mujoco_driver_node
+  ${catkin_LIBRARIES}
+  cxmujoco_lib
 
 )
 

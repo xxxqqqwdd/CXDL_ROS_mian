@@ -1,0 +1,80 @@
+left_arm_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+    - joint101
+    - joint102
+    - joint103
+    - joint104
+    - joint105
+    - joint106
+  gains:
+    joint101:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint102:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint103:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint104:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint105:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint106:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+right_arm_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+    - joint201
+    - joint202
+    - joint203
+    - joint204
+    - joint205
+    - joint206
+  gains:
+    joint201:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint202:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint203:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint204:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint205:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    joint206:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1

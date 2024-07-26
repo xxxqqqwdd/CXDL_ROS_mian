@@ -7,6 +7,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "string.h"
+#include "cx_mujoco_cpp_driver/mujoco_driver.h"
 
 
 char filename[] = "./src/CXDL_ROS/cx_mujoco_cpp_driver/model/cx_arm.xml";
@@ -102,47 +103,6 @@ void scroll(GLFWwindow* window, double xoffset, double yoffset)
 
 
 
-/******************************/
-void set_torque_control(const mjModel* m,int actuator_no,int flag)
-{
-  if (flag==0)
-    m->actuator_gainprm[10*actuator_no+0]=0;
-  else
-    m->actuator_gainprm[10*actuator_no+0]=1;
-}
-/******************************/
-
-
-/******************************/
-void set_position_servo(const mjModel* m,int actuator_no,double kp)
-{
-  m->actuator_gainprm[10*actuator_no+0]=kp;
-  m->actuator_biasprm[10*actuator_no+1]=-kp;
-}
-/******************************/
-
-/******************************/
-void set_velocity_servo(const mjModel* m,int actuator_no,double kv)
-{
-  m->actuator_gainprm[10*actuator_no+0]=kv;
-  m->actuator_biasprm[10*actuator_no+2]=-kv;
-}
-/******************************/
-
-//**************************
-void init_controller(const mjModel* m, mjData* d)
-{
-
-
-}
-
-//**************************
-void mycontroller(const mjModel* m, mjData* d)
-{
-  //write control here
-
-
-}
 
 
 
@@ -151,7 +111,7 @@ int main(int argc, const char** argv)
 {
 
     // activate software
-    mj_activate("mjkey.txt");
+    // mj_activate("mjkey.txt");
 
 
     // load and compile model
@@ -216,7 +176,6 @@ int main(int argc, const char** argv)
             mj_step(m, d);
 
 
-
         }
 
        // get framebuffer viewport
@@ -240,7 +199,7 @@ int main(int argc, const char** argv)
 
         //*************************************************************************************//
         //下面这一行的的意思是从相机的结构体里面输出视角的观察点、方位角、和仰角
-        printf("{%f, %f, %f, %f, %f, %f};\n",cam.azimuth,cam.elevation, cam.distance,cam.lookat[0],cam.lookat[1],cam.lookat[2]);
+        // printf("{%f, %f, %f, %f, %f, %f};\n",cam.azimuth,cam.elevation, cam.distance,cam.lookat[0],cam.lookat[1],cam.lookat[2]);
 
 
 

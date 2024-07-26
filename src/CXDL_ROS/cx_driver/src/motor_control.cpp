@@ -141,6 +141,7 @@ void motor_status_disable()
 				Motor_Vector[v_m].transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector[v_m].getFrame(), 1);
 		}
 	}		
+
 }
 
 	
@@ -331,25 +332,29 @@ for(int v_m = 0;v_m<12;v_m++)
 		}
 	}
 
-if(v_m == 3||v_m == 5||v_m == 9||v_m == 11)
-{
-for(int sdo_row_i=0;sdo_row_i<haokong_size;sdo_row_i++){
-for(int j=0;j<8;j++)
-{
-if(sdo_row_i==2||sdo_row_i==10||sdo_row_i==11||sdo_row_i==20||sdo_row_i==21||sdo_row_i==22)
-{
-haokong_sdo[sdo_row_i][4]=(v_m+129);
-Motor_Vector[v_m].setData(j,haokong_sdo[sdo_row_i][j]);
-}
-else
-{
-Motor_Vector[v_m].setData(j,haokong_sdo[sdo_row_i][j]);
-}
-}
+	if(v_m == 3||v_m == 5||v_m == 9||v_m == 11)
+	{
+		for(int sdo_row_i=0;sdo_row_i<haokong_size;sdo_row_i++){
+			for(int j=0;j<8;j++)
+			{
+			if(sdo_row_i==2||sdo_row_i==10||sdo_row_i==11||sdo_row_i==20)
+			{
+			haokong_sdo[sdo_row_i][4]=(v_m+129);
+			Motor_Vector[v_m].setData(j,haokong_sdo[sdo_row_i][j]);
+			}
+			else if(sdo_row_i==21||sdo_row_i==26)
+			{
+			haokong_sdo[sdo_row_i][4]=(v_m+1);
+			Motor_Vector[v_m].setData(j,haokong_sdo[sdo_row_i][j]);}
+			else
+			{
+			Motor_Vector[v_m].setData(j,haokong_sdo[sdo_row_i][j]);
+			}
+			}
 
-Motor_Vector[v_m].transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector[v_m].getFrame(), 1);
-}
-}
+			Motor_Vector[v_m].transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &Motor_Vector[v_m].getFrame(), 1);
+		}
+	}
 }
 
 ROS_INFO("pdo配置完成!!!");
