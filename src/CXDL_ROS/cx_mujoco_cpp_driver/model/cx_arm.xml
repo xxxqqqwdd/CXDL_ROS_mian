@@ -1,5 +1,9 @@
 <mujoco model="cx_description">
   <compiler angle="radian" meshdir="meshes/" autolimits="true"/>
+
+  <option timestep ="0.001" integrator ="RK4">
+    <flag sensornoise = "disable" energy="enable" contact ="enable" />
+  </option>
   <asset>
     <mesh name="base_link" file="base_link.STL"/>
     <mesh name="Link101" file="Link101.STL"/>
@@ -94,58 +98,97 @@
 
 
      <actuator>
-    <motor joint="joint101" name ="torque101" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo101" joint ="joint101" kp="100"/>
-    <velocity name ="velocity_servo101" joint ="joint101" kv="0.1"/>
+    <motor joint="joint101" name ="t101" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p101" joint ="joint101" kp="100"/>
+    <velocity name ="v101" joint ="joint101" kv="0.1"/>
 
-    <motor joint="joint102" name ="torque102" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo102" joint ="joint102" kp="100"/>
-    <velocity name ="velocity_servo102" joint ="joint102" kv="0.1"/>
+    <motor joint="joint102" name ="t102" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p102" joint ="joint102" kp="100"/>
+    <velocity name ="v102" joint ="joint102" kv="0.1"/>
 
-    <motor joint="joint103" name ="torque103" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo103" joint ="joint103" kp="100"/>
-    <velocity name ="velocity_servo103" joint ="joint103" kv="0.1"/>
+    <motor joint="joint103" name ="t103" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p103" joint ="joint103" kp="100"/>
+    <velocity name ="v103" joint ="joint103" kv="0.1"/>
 
-    <motor joint="joint104" name ="torque104" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo104" joint ="joint104" kp="100"/>
-    <velocity name ="velocity_servo104" joint ="joint104" kv="0.1"/>
+    <motor joint="joint104" name ="t104" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p104" joint ="joint104" kp="100"/>
+    <velocity name ="v104" joint ="joint104" kv="0.1"/>
 
-    <motor joint="joint105" name ="torque105" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo105" joint ="joint105" kp="100"/>
-    <velocity name ="velocity_servo105" joint ="joint105" kv="0.1"/>
+    <motor joint="joint105" name ="t105" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p105" joint ="joint105" kp="100"/>
+    <velocity name ="v105" joint ="joint105" kv="0.1"/>
 
-    <motor joint="joint106" name ="torque106" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo106" joint ="joint106" kp="100"/>
-    <velocity name ="velocity_servo106" joint ="joint106" kv="0.1"/>
+    <motor joint="joint106" name ="t106" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p106" joint ="joint106" kp="100"/>
+    <velocity name ="v106" joint ="joint106" kv="0.1"/>
 
-    <motor joint="joint201" name ="torque201" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo201" joint ="joint201" kp="100"/>
-    <velocity name ="velocity_servo201" joint ="joint201" kv="0.1"/>
+    <motor joint="joint201" name ="t201" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p201" joint ="joint201" kp="100"/>
+    <velocity name ="v201" joint ="joint201" kv="0.1"/>
 
-    <motor joint="joint202" name ="torque202" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo202" joint ="joint202" kp="100"/>
-    <velocity name ="velocity_servo202" joint ="joint202" kv="0.1"/>
+    <motor joint="joint202" name ="t202" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p202" joint ="joint202" kp="100"/>
+    <velocity name ="v202" joint ="joint202" kv="0.1"/>
 
-    <motor joint="joint203" name ="torque203" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo203" joint ="joint203" kp="100"/>
-    <velocity name ="velocity_servo203" joint ="joint203" kv="0.1"/>
+    <motor joint="joint203" name ="t203" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p203" joint ="joint203" kp="100"/>
+    <velocity name ="v203" joint ="joint203" kv="0.1"/>
 
-    <motor joint="joint204" name ="torque204" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo204" joint ="joint204" kp="100"/>
-    <velocity name ="velocity_servo204" joint ="joint204" kv="0.1"/>
+    <motor joint="joint204" name ="t204" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p204" joint ="joint204" kp="100"/>
+    <velocity name ="v204" joint ="joint204" kv="0.1"/>
 
-    <motor joint="joint205" name ="torque205" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo205" joint ="joint205" kp="100"/>
-    <velocity name ="velocity_servo205" joint ="joint205" kv="0.1"/>
+    <motor joint="joint205" name ="t205" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p205" joint ="joint205" kp="100"/>
+    <velocity name ="v205" joint ="joint205" kv="0.1"/>
 
-    <motor joint="joint206" name ="torque206" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name ="position_servo206" joint ="joint206" kp="100"/>
-    <velocity name ="velocity_servo206" joint ="joint206" kv="0.1"/>
-
-
+    <motor joint="joint206" name ="t206" gear = "1" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name ="p206" joint ="joint206" kp="100"/>
+    <velocity name ="v206" joint ="joint206" kv="0.1"/>
 
     </actuator>
 
+
+
+<sensor>
+    <jointpos joint ="joint101" noise="0.2"/>
+    <jointvel joint ="joint101" noise="0.2"/>
+
+    <jointpos joint ="joint102" noise="0.2"/>
+    <jointvel joint ="joint102" noise="0.2"/>
+
+    <jointpos joint ="joint103" noise="0.2"/>
+    <jointvel joint ="joint103" noise="0.2"/>
+
+    <jointpos joint ="joint104" noise="0.2"/>
+    <jointvel joint ="joint104" noise="0.2"/>
+
+    <jointpos joint ="joint105" noise="0.2"/>
+    <jointvel joint ="joint105" noise="0.2"/>
+
+    <jointpos joint ="joint106" noise="0.2"/>
+    <jointvel joint ="joint106" noise="0.2"/>
+
+    <jointpos joint ="joint201" noise="0.2"/>
+    <jointvel joint ="joint201" noise="0.2"/>
+
+    <jointpos joint ="joint202" noise="0.2"/>
+    <jointvel joint ="joint202" noise="0.2"/>
+
+    <jointpos joint ="joint203" noise="0.2"/>
+    <jointvel joint ="joint203" noise="0.2"/>
+
+    <jointpos joint ="joint204" noise="0.2"/>
+    <jointvel joint ="joint204" noise="0.2"/>
+
+    <jointpos joint ="joint205" noise="0.2"/>
+    <jointvel joint ="joint205" noise="0.2"/>
+
+    <jointpos joint ="joint206" noise="0.2"/>
+    <jointvel joint ="joint206" noise="0.2"/>
+
+
+</sensor>
 
 
 </mujoco>
