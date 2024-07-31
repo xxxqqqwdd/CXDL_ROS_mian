@@ -9,12 +9,13 @@
 #include "cx_driver/motor_info.h"
 #include "cx_driver/joint_angle.h"
 #include "std_msgs/Bool.h"
-
+#include "cx_driver/feedback.h"
 
 
 
 //#ROS收发
 ros::Publisher pub_frame_info ;
+ros::Publisher pub_motor_feedback;
 ros::Subscriber sub_frame_info;
 ros::Subscriber sub_motor_status;
 
@@ -50,7 +51,7 @@ double p_kd0;
 double v_kp0;
 double v_kd0;
 double v_ki0;
-
+double feedback_interval;
 //函数
 void joint_angle_cb(const cx_driver::joint_angle::ConstPtr& msg_p);
 void motor_timer_callback(const ros::TimerEvent);
@@ -69,7 +70,7 @@ void haokong_motor_control(std::vector<double> haokong_angle,std::vector<int> mo
 void motor_status_enable();
 void motor_status_disable();
 int float_to_uint(float x, float x_min, float x_max, int bits);
-
+void feedback_callback(const ros::TimerEvent);
 
 //结构体
 // std::vector<std::unique_ptr<Motor>> Motor_Vector;  
@@ -135,11 +136,7 @@ BYTE haokong_sdo[25][8]=
 };
 
 
+cx_driver::feedback pvfeedback_data;
 
 
-
-/////////////////////
-
-
-int ii=0;
 #endif 

@@ -1,7 +1,7 @@
 CAN :
   frame_SDO_interval : 5
   frame_PDO_interval : 5
-  sync_interval : 1000
+  sync_interval : 10
 
 
 motor :
@@ -21,4 +21,10 @@ motor :
     V_KD_MAX : 50
     V_KI_MAX : 0.05
     V_KI_MIN : 0
+
+
+
+
+QT:
+  feedback_interval : 10
 

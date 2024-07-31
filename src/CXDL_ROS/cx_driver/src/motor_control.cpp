@@ -6,6 +6,133 @@
 #include "cx_driver/joint_angle.h"
 #include "std_msgs/Bool.h"
 
+#include <mutex> 
+
+
+std::mutex mtx; 
+
+
+void *receive_func(void* param)  //接收线程。
+{
+	int reclen=0;
+	VCI_CAN_OBJ rec[3000];//接收缓存，设为3000为佳。
+	int i,j,motor_i;
+	int32_t zhuoyu_P,zhuoyu_V,haokong_P,haokong_V,shengjiang_P,shengjiang_V;
+    int16_t zhuoyu_T,haokong_T,shengjiang_T,dipan_move_v,dipan_rotate_v;  
+	int *run=(int*)param;//线程启动，退出控制。
+    int ind=0;
+	while((*run)&0x0f)
+	{
+		if((reclen=VCI_Receive(VCI_USBCAN2,0,ind,rec,3000,100))>0)//调用接收函数，如果有数据，进行数据处理显示。
+		{
+			for(j=0;j<reclen;j++)
+			{
+				std::lock_guard<std::mutex> lock(mtx);  
+
+				if (rec[j].ID==5||rec[j].ID==11)  //motorevo
+				{
+					motor_i = rec[j].ID-1;
+					pvfeedback_data.positoion[motor_i]=((rec[j].Data[1]*pow(2,8)+rec[j].Data[2])*25/pow(2,16))-12.5;
+					pvfeedback_data.velocity[motor_i]=((rec[j].Data[3]*pow(2,4)+int(rec[j].Data[4])/int(16))*20/pow(2,12))-10;
+					pvfeedback_data.torque[motor_i]=(((int(rec[j].Data[4])%int(16))*pow(2,8)+rec[j].Data[5])*100/pow(2,12))-50;
+					continue;
+				}
+				if (rec[j].ID==385||rec[j].ID==386||rec[j].ID==387||rec[j].ID==391||rec[j].ID==392||rec[j].ID==393)   //zhuoyu
+				{
+					motor_i = rec[j].ID-385;
+					zhuoyu_P = (rec[j].Data[0] << 0) | (rec[j].Data[1] << 8) | (rec[j].Data[2] << 16) | (rec[j].Data[3] << 24);
+					zhuoyu_V = (rec[j].Data[4] << 0) | (rec[j].Data[5] << 8) | (rec[j].Data[6] << 16) | (rec[j].Data[7] << 24);					
+					pvfeedback_data.positoion[motor_i]=zhuoyu_P*(2*M_PI)/pow(2,20);
+					pvfeedback_data.velocity[motor_i]=zhuoyu_V*(2*M_PI)/pow(2,20);
+					continue;
+				}
+				if (rec[j].ID==641||rec[j].ID==642||rec[j].ID==643||rec[j].ID==647||rec[j].ID==648||rec[j].ID==649)   //zhuoyu
+				{
+					motor_i = rec[j].ID-641;
+					zhuoyu_T = (rec[j].Data[0] << 0) | (rec[j].Data[1] << 8);
+					pvfeedback_data.torque[motor_i]=zhuoyu_T*(2*M_PI)/pow(2,20);
+					continue;
+				}
+				if (rec[j].ID==388||rec[j].ID==390||rec[j].ID==394||rec[j].ID==396)   //haokong
+				{
+					motor_i = rec[j].ID-385;
+					haokong_P = (rec[j].Data[0] << 0) | (rec[j].Data[1] << 8) | (rec[j].Data[2] << 16) | (rec[j].Data[3] << 24);
+					haokong_V = (rec[j].Data[4] << 0) | (rec[j].Data[5] << 8) | (rec[j].Data[6] << 16) | (rec[j].Data[7] << 24);		
+					pvfeedback_data.positoion[motor_i]=haokong_P*(2*M_PI)/pow(2,16);
+					pvfeedback_data.velocity[motor_i]=haokong_V*(2*M_PI)/60;
+					continue;
+				}
+				if (rec[j].ID==644||rec[j].ID==646||rec[j].ID==650||rec[j].ID==652)   //haokong
+				{
+					motor_i = rec[j].ID-641;
+					haokong_T = (rec[j].Data[0] << 0) | (rec[j].Data[1] << 8);
+					pvfeedback_data.torque[motor_i]=haokong_T*(2*M_PI)/pow(2,16);
+					continue;
+				}
+				if (rec[j].ID==397||rec[j].ID==398)   //升降
+				{
+					motor_i = rec[j].ID-385;
+					shengjiang_P = (rec[j].Data[0] << 0) | (rec[j].Data[1] << 8) | (rec[j].Data[2] << 16) | (rec[j].Data[3] << 24);
+					shengjiang_V = (rec[j].Data[4] << 0) | (rec[j].Data[5] << 8) | (rec[j].Data[6] << 16) | (rec[j].Data[7] << 24);		
+					pvfeedback_data.positoion[motor_i]=shengjiang_P*(2*M_PI)/pow(2,16);
+					pvfeedback_data.velocity[motor_i]=shengjiang_V*(2*M_PI)/60;
+					continue;
+				}
+				if (rec[j].ID==653||rec[j].ID==654)   //升降
+				{
+					motor_i = rec[j].ID-641;
+					shengjiang_T = (rec[j].Data[0] << 0) | (rec[j].Data[1] << 8);
+					pvfeedback_data.torque[motor_i]=shengjiang_T*(2*M_PI)/pow(2,16);
+					continue;
+				}
+				if (rec[j].ID==545)   //底盘
+				{
+					motor_i = 14;
+					dipan_move_v = (rec[j].Data[0] << 8) | (rec[j].Data[1] << 0);     //mm/s
+					dipan_rotate_v = (rec[j].Data[2] << 8) | (rec[j].Data[3] << 0);   //0.001rad/s
+					pvfeedback_data.velocity[motor_i]=dipan_move_v;
+					pvfeedback_data.velocity[motor_i+1]=dipan_rotate_v;
+					continue;
+				}
+
+				printf("Index:%04d  ",count);count++;//序号递增
+				printf("CAN%d RX ID:0x%08X", ind+1, rec[j].ID);//ID
+				if(rec[j].ExternFlag==0) printf(" Standard ");//帧格式：标准帧
+				if(rec[j].ExternFlag==1) printf(" Extend   ");//帧格式：扩展帧
+				if(rec[j].RemoteFlag==0) printf(" Data   ");//帧类型：数据帧
+				if(rec[j].RemoteFlag==1) printf(" Remote ");//帧类型：远程帧
+				printf("DLC:0x%02X",rec[j].DataLen);//帧长度
+				printf(" data:0x");	//数据
+				for(i = 0; i < rec[j].DataLen; i++)
+				{
+					printf(" %02X", rec[j].Data[i]);
+				}
+				printf(" TimeStamp:0x%08X",rec[j].TimeStamp);//时间标识。
+				printf("\n");
+			}
+
+		}
+		ind=!ind;//变换通道号，以便下次读取另一通道，交替读取。		
+	}
+	printf("run thread exit\n");//退出接收线程	
+	pthread_exit(0);
+}
+
+
+
+
+
+void feedback_callback(const ros::TimerEvent){
+
+	std::lock_guard<std::mutex> lock(mtx);
+	pvfeedback_data.stamp = ros::Time::now();
+	pub_motor_feedback.publish(pvfeedback_data);
+
+}
+
+
+
+
 
 
 void joint_angle_cb(const cx_driver::joint_angle::ConstPtr& msg_p){
@@ -164,7 +291,6 @@ void motor_timer_callback(const ros::TimerEvent){
 
 void init(ros::NodeHandle nh)
 {
-
 	nh.getParam("/motor/evo/acceleration",evo_acceleration);
 	nh.getParam("/motor/evo/P_MIN",P_MIN);
 	nh.getParam("/motor/evo/P_MAX",P_MAX);
@@ -180,14 +306,12 @@ void init(ros::NodeHandle nh)
 	nh.getParam("/motor/evo/V_KD_MAX",V_KD_MAX);
 	nh.getParam("/motor/evo/V_KI_MAX",V_KI_MAX);
 	nh.getParam("/motor/evo/V_KI_MIN",V_KI_MIN);
-
+	nh.getParam("/QT/feedback_interval",feedback_interval);
 	p_kp0 = 15;
 	p_kd0 = 4.5;
 	v_kp0 = 50;
 	v_kd0 = 0;
 	v_ki0 = 0.001;
-
-
 }
 
 
@@ -202,8 +326,6 @@ void initCANConfig(ros::NodeHandle nh){
 	{
 		
 		printf(">>open deivce success!\n");//打开设备成功
-
-		
 	}else
 	{
 		printf(">>open deivce error!\n");

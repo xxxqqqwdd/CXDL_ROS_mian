@@ -51,6 +51,7 @@ add_message_files(
   FILES
   motor_info.msg
   joint_angle.msg
+  feedback.msg
 )
 
 ## Generate services in the 'srv' folder

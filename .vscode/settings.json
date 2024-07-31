@@ -114,6 +114,9 @@
         "vec3ub": "cpp",
         "vec3ui": "cpp",
         "vec3us": "cpp",
-        "viewport": "cpp"
+        "viewport": "cpp",
+        "boundingbox": "cpp",
+        "boundingsphere": "cpp",
+        "timer": "cpp"
     }
 }
