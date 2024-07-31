@@ -10,7 +10,7 @@
 #include "cx_mujoco_cpp_driver/mujoco_driver.h"
 
 
-char filename[] = "./src/CXDL_ROS/cx_mujoco_cpp_driver/model/cx_arm.xml";
+char filename[] = "/home/u/0_CXDL/CXDL_ROS/src/CXDL_ROS/cx_mujoco_cpp_driver/model/cx_arm.xml";
 // MuJoCo data structures
 mjModel* m = NULL;                  // MuJoCo model
 mjData* d = NULL;                   // MuJoCo data
@@ -199,7 +199,7 @@ int main(int argc, const char** argv)
 
         //*************************************************************************************//
         //下面这一行的的意思是从相机的结构体里面输出视角的观察点、方位角、和仰角
-        // printf("{%f, %f, %f, %f, %f, %f};\n",cam.azimuth,cam.elevation, cam.distance,cam.lookat[0],cam.lookat[1],cam.lookat[2]);
+//         printf("{%f, %f, %f, %f, %f, %f};\n",cam.azimuth,cam.elevation, cam.distance,cam.lookat[0],cam.lookat[1],cam.lookat[2]);
 
 
 

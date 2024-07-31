@@ -1,4 +1,4 @@
-#include "cx_mujoco_cpp_driver/mujoco_driver.h"
+﻿#include "cx_mujoco_cpp_driver/mujoco_driver.h"
 #include <iostream>
 
 
@@ -34,11 +34,26 @@ void init_controller(const mjModel* m, mjData* d)
 {
 
 
+   d->qpos[0]=0;
+   int actuator_no=1;
+   int flag=0;
+   double kp=100;
+   set_position_servo( m, actuator_no, kp);
+   actuator_no=2;
+   double kv=0.1;
+    set_velocity_servo( m,actuator_no, kv);
+
+//  set_torque_control( m,actuator_no, flag);
 }
 
 //**************************
 void mycontroller(const mjModel* m, mjData* d)
 {
+
+  d->ctrl[1]=2;
+//  std::cout<<d->sensordata[0]<<std::endl;
+
+
 
 
 }
