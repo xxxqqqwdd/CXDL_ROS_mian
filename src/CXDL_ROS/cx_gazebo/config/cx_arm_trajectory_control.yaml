@@ -23,6 +23,7 @@ arm:
       joint105:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
       joint106:   {p: 1.0, i: 0.0, d: 0, i_clamp: 0.0}
       joint201:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
+      joint202:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
       joint203:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
       joint204:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}
       joint205:   {p: 100.0, i: 0.0, d: 0.1, i_clamp: 0.0}

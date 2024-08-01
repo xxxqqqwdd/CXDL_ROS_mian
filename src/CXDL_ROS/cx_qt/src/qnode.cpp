@@ -21,7 +21,6 @@
 ** Namespaces
 *****************************************************************************/
 
-namespace CX_QT {
 
 /*****************************************************************************
 ** Implementation
@@ -37,55 +36,56 @@ QNode::~QNode() {
       ros::shutdown(); // explicitly needed since we use ros::start();
       ros::waitForShutdown();
     }
-	wait();
+    wait();
 }
 
 bool QNode::init() {
+
+    std::cout<<"ddddddd2"<<std::endl;
   ros::init(init_argc,init_argv,"cx_qt_node");
 	if ( ! ros::master::check() ) {
 		return false;
 	}
 	ros::start(); // explicitly needed since our nodehandle is going out of scope.
   ros::NodeHandle nh;
-	// Add your ros communications here.
-  sub_frame_info = nh.subscribe("motor_feedback",10,&QNode::motor_feedback_cb,this);
 
+std::cout<<"ddddddd3"<<std::endl;
+  sub_motor_feedback_info=nh.subscribe<cx_driver::feedback>("/motor_feedback",10,&QNode::motor_feedback_cb,this);
 
-	start();
+std::cout<<"ddddddd4"<<std::endl;
+    start();
+
 	return true;
 }
 
 
-//speech_sub=n.subscribe("/speech_to_text",1000,&QNode::speechCallback,this);
 
+void QNode::motor_feedback_cb(const cx_driver::feedbackConstPtr& msg_p)
 
-void QNode::motor_feedback_cb(const cx_driver::feedback &msg)
 {
-    msg.stamp;
+
+    // 当接收到电机反馈时，发射信号
+
+    emit motorFeedbackReceived(msg_p);
+
+    std::cout << "Received motor feedback" << std::endl;
+
 }
 
+//启动电机
+void QNode::ros_launch_start()
+{
+    system("gnome-terminal -x bash -c 'source /home/u/CXDL/code/git/CXDL_ROS_main/devel/setup.bash; roslaunch cx_driver cx_driver.launch'&");
+}
 
 
 
 void QNode::run() {
-	ros::Rate loop_rate(1);
-	int count = 0;
-	while ( ros::ok() ) {
 
-		std_msgs::String msg;
-		std::stringstream ss;
-		ss << "hello world " << count;
-		msg.data = ss.str();
-		chatter_publisher.publish(msg);
-		log(Info,std::string("I sent: ")+msg.data);
-		ros::spinOnce();
-		loop_rate.sleep();
-		++count;
-	}
-	std::cout << "Ros shutdown, proceeding to close the gui." << std::endl;
-	Q_EMIT rosShutdown(); // used to signal the gui for a shutdown (useful to roslaunch)
+
+
+ros::spin();
 }
-
 
 void QNode::log( const LogLevel &level, const std::string &msg) {
 	logging_model.insertRows(logging_model.rowCount(),1);
@@ -122,22 +122,6 @@ void QNode::log( const LogLevel &level, const std::string &msg) {
 	Q_EMIT loggingUpdated(); // used to readjust the scrollbar
 }
 
-}  // namespace CX_QT
 
 
 
-//bool QNode::init(const std::string &master_url, const std::string &host_url) {
-//	std::map<std::string,std::string> remappings;
-//	remappings["__master"] = master_url;
-//	remappings["__hostname"] = host_url;
-//  ros::init(remappings,"cx_qt_node");
-//	if ( ! ros::master::check() ) {
-//		return false;
-//	}
-//	ros::start(); // explicitly needed since our nodehandle is going out of scope.
-//	ros::NodeHandle n;
-//	// Add your ros communications here.
-//	chatter_publisher = n.advertise<std_msgs::String>("chatter", 1000);
-//	start();
-//	return true;
-//}

@@ -14,7 +14,6 @@
 ** Namespace
 *****************************************************************************/
 
-namespace CX_QT {
 
 /*****************************************************************************
 ** Interface [MainWindow]
@@ -26,8 +25,27 @@ class MainWindow : public QMainWindow {
 Q_OBJECT
 
 public:
+
 	MainWindow(int argc, char** argv, QWidget *parent = 0);
 	~MainWindow();
+
+
+
+
+
+    //my
+    void initslots();
+
+private slots:
+
+
+    void on_ceshi_clicked();
+    void motor_feedback_cb_slot(const cx_driver::feedback::ConstPtr& msg_p);
+
+Q_SIGNALS:
+
+
+
 
 
 
@@ -36,6 +54,6 @@ private:
 	QNode qnode;
 };
 
-}  // namespace CX_QT
+
 
 #endif // CX_QT_MAIN_WINDOW_H

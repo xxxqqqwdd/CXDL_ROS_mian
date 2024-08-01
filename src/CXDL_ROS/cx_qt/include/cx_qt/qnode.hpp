@@ -18,8 +18,8 @@
 #include <string>
 #include <QThread>
 #include <QStringListModel>
-//#include "main_window.hpp"
-#include "ui_main_window.h"
+
+
 #include "../../../devel/include/cx_driver/feedback.h"
 
 
@@ -30,7 +30,7 @@ class mainwindows;
 ** Namespaces
 *****************************************************************************/
 
-namespace CX_QT {
+
 
 /*****************************************************************************
 ** Class
@@ -40,21 +40,12 @@ class QNode : public QThread {
     Q_OBJECT
 public:
 
-//  explicit QNode(UI::MainWindow *p);
-//  UI::MainWindow* exUI;
-
-
 
 	QNode(int argc, char** argv );
 	virtual ~QNode();
 	bool init();
-	bool init(const std::string &master_url, const std::string &host_url);
-	void run();
 
-
-
-  ros::Subscriber sub_frame_info ;
-  void motor_feedback_cb(const cx_driver::feedback &msg);
+    void run();
 
 	/*********************
 	** Logging
@@ -70,17 +61,47 @@ public:
 	QStringListModel* loggingModel() { return &logging_model; }
 	void log( const LogLevel &level, const std::string &msg);
 
+
+
+    void motor_feedback_cb(const cx_driver::feedback::ConstPtr& msg_p);
+
+
+
+public slots:
+    //my
+    void ros_launch_start();
+
+
+signals:
+
+    // 定义一个信号，当接收到电机反馈时发射
+
+    void motorFeedbackReceived(const cx_driver::feedbackConstPtr& msg);
+
 Q_SIGNALS:
 	void loggingUpdated();
     void rosShutdown();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 private:
 	int init_argc;
 	char** init_argv;
-	ros::Publisher chatter_publisher;
     QStringListModel logging_model;
+    ros::Subscriber sub_motor_feedback_info ;
 };
 
-}  // namespace CX_QT
+
 
 #endif /* CX_QT_QNODE_HPP_ */

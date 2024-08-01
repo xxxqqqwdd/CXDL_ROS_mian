@@ -286,7 +286,6 @@ void motor_timer_callback(const ros::TimerEvent){
 	CAN_master.setID(CAN_master.getSdoID());
 	CAN_master.transmit(CAN_frame_SDO_interval*1000,VCI_USBCAN2, 0, 0, &CAN_master.getFrame(), 1);
 
-	ROS_INFO("SYNC__SSSSSSSSSSSSSSS");
 }
 
 void init(ros::NodeHandle nh)

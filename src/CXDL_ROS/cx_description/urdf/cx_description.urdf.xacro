@@ -5,15 +5,20 @@
 <robot
   name="cx_description"  xmlns:xacro="http://www.ros.org/wiki/xacro">
   
-  
+
+
+
     <link 
-  name="dummy">
+  name="world">
 </link>
 <joint 
   name="dummy_joint" 
   type="fixed">
+   <origin
+      xyz="0 0 2"
+      rpy="0 0 0" />
   <parent 
-  link="dummy"/>
+  link="world"/>
   <child 
   link="base_link"/>
 </joint>
@@ -21,6 +26,7 @@
 
   <link
     name="base_link">
+     
     <inertial>
       <origin
         xyz="-8.57785426963885E-06 2.91685023845365E-11 -0.000974489333363106"
@@ -61,6 +67,7 @@
   </link>
   <link
     name="Link101">
+     
     <inertial>
       <origin
         xyz="1.7677E-18 0.031119 -0.031336"
@@ -119,6 +126,7 @@
   </joint>
   <link
     name="Link102">
+     
     <inertial>
       <origin
         xyz="6.5582E-11 0.047474 -0.00034923"
@@ -177,6 +185,7 @@
   </joint>
   <link
     name="Link103">
+     
     <inertial>
       <origin
         xyz="0.00403786373486228 -8.5540454944355E-07 -0.110448513050591"
@@ -235,6 +244,7 @@
   </joint>
   <link
     name="Link104">
+     
     <inertial>
       <origin
         xyz="-0.010629 0.0077446 2.2742E-09"
@@ -293,6 +303,7 @@
   </joint>
   <link
     name="Link105">
+     
     <inertial>
       <origin
         xyz="0.00133867533735113 -2.52078063982315E-07 -0.136878436349784"
@@ -351,6 +362,7 @@
   </joint>
   <link
     name="Link106">
+     
     <inertial>
       <origin
         xyz="-0.0147561154984305 0.115479110569376 -1.14344406740984E-08"
@@ -409,6 +421,7 @@
   </joint>
   <link
     name="Link201">
+     
     <inertial>
       <origin
         xyz="-1.4794906639831E-17 0.0311194583357994 0.0313358876222972"
@@ -467,6 +480,7 @@
   </joint>
   <link
     name="Link202">
+     
     <inertial>
       <origin
         xyz="6.55817899986033E-11 0.0474740262124326 -0.00034923154558"
@@ -525,6 +539,7 @@
   </joint>
   <link
     name="Link203">
+     
     <inertial>
       <origin
         xyz="0.0040379 -8.554E-07 -0.11045"
@@ -583,6 +598,7 @@
   </joint>
   <link
     name="Link204">
+     
     <inertial>
       <origin
         xyz="-0.0106288743285585 0.00774461276828298 2.53762263979773E-09"
@@ -641,6 +657,7 @@
   </joint>
   <link
     name="Link205">
+     
     <inertial>
       <origin
         xyz="-0.0013387 2.5208E-07 -0.13688"
@@ -699,6 +716,7 @@
   </joint>
   <link
     name="Link206">
+     
     <inertial>
       <origin
         xyz="0.014756 0.11548 1.1434E-08"
