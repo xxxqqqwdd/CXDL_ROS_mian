@@ -569,7 +569,7 @@ void evo_motor_control(std::vector<double> evo_angle,std::vector<int> motor_evo_
 			std::cout<<"evo_acceleration"<<evo_acceleration<<std::endl;
 			
 			int P0 =float_to_uint(evo_angle.at(i_1), P_MIN, P_MAX, 16);
-			int V0 = float_to_uint(v_i, V_MIN, V_MAX, 8);
+			int V0 = float_to_uint(1, V_MIN, V_MAX, 8);
 			int P_kp0 = float_to_uint(p_kp0, P_KP_MIN, P_KP_MAX, 8);
 			int P_kd0 = float_to_uint(p_kd0, P_KD_MIN, P_KD_MAX, 8);
 			int V_kp0 = float_to_uint(v_kp0,V_KP_MIN,V_KP_MAX,8);
