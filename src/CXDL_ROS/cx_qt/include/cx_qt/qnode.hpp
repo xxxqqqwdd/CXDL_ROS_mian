@@ -21,9 +21,7 @@
 
 
 #include "../../../devel/include/cx_driver/feedback.h"
-
-
-class mainwindows;
+#include "../../../devel/include/cx_driver/joint_angle.h"
 
 
 /*****************************************************************************
@@ -39,7 +37,7 @@ class mainwindows;
 class QNode : public QThread {
     Q_OBJECT
 public:
-
+//    explicit QNode(QObject *parent = nullptr);
 
 	QNode(int argc, char** argv );
 	virtual ~QNode();
@@ -70,13 +68,14 @@ public:
 public slots:
     //my
     void ros_launch_start();
+    void moter_ceshi_(int a);
 
 
 signals:
 
     // 定义一个信号，当接收到电机反馈时发射
 
-    void motorFeedbackReceived(const cx_driver::feedbackConstPtr& msg);
+    void motorFeedbackReceived(cx_driver::feedback*);
 
 Q_SIGNALS:
 	void loggingUpdated();
@@ -99,7 +98,14 @@ private:
 	int init_argc;
 	char** init_argv;
     QStringListModel logging_model;
+    //电机反馈
     ros::Subscriber sub_motor_feedback_info ;
+    //发送角度
+    ros::Publisher pub_angle_info;
+    //电机反馈_用于传递参数
+    cx_driver::feedback* msg;
+
+    cx_driver::joint_angle angles;
 };
 
 

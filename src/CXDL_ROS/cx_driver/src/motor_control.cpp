@@ -32,7 +32,7 @@ void *receive_func(void* param)  //接收线程。
 				if (rec[j].ID==5||rec[j].ID==11)  //motorevo
 				{
 					motor_i = rec[j].ID-1;
-					pvfeedback_data.positoion[motor_i]=((rec[j].Data[1]*pow(2,8)+rec[j].Data[2])*25/pow(2,16))-12.5;
+                    pvfeedback_data.position[motor_i]=((rec[j].Data[1]*pow(2,8)+rec[j].Data[2])*25/pow(2,16))-12.5;
 					pvfeedback_data.velocity[motor_i]=((rec[j].Data[3]*pow(2,4)+int(rec[j].Data[4])/int(16))*20/pow(2,12))-10;
 					pvfeedback_data.torque[motor_i]=(((int(rec[j].Data[4])%int(16))*pow(2,8)+rec[j].Data[5])*100/pow(2,12))-50;
 					continue;
@@ -42,7 +42,7 @@ void *receive_func(void* param)  //接收线程。
 					motor_i = rec[j].ID-385;
 					zhuoyu_P = (rec[j].Data[0] << 0) | (rec[j].Data[1] << 8) | (rec[j].Data[2] << 16) | (rec[j].Data[3] << 24);
 					zhuoyu_V = (rec[j].Data[4] << 0) | (rec[j].Data[5] << 8) | (rec[j].Data[6] << 16) | (rec[j].Data[7] << 24);					
-					pvfeedback_data.positoion[motor_i]=zhuoyu_P*(2*M_PI)/pow(2,20);
+                    pvfeedback_data.position[motor_i]=zhuoyu_P*(2*M_PI)/pow(2,20);
 					pvfeedback_data.velocity[motor_i]=zhuoyu_V*(2*M_PI)/pow(2,20);
 					continue;
 				}
@@ -58,7 +58,7 @@ void *receive_func(void* param)  //接收线程。
 					motor_i = rec[j].ID-385;
 					haokong_P = (rec[j].Data[0] << 0) | (rec[j].Data[1] << 8) | (rec[j].Data[2] << 16) | (rec[j].Data[3] << 24);
 					haokong_V = (rec[j].Data[4] << 0) | (rec[j].Data[5] << 8) | (rec[j].Data[6] << 16) | (rec[j].Data[7] << 24);		
-					pvfeedback_data.positoion[motor_i]=haokong_P*(2*M_PI)/pow(2,16);
+                    pvfeedback_data.position[motor_i]=haokong_P*(2*M_PI)/pow(2,16);
 					pvfeedback_data.velocity[motor_i]=haokong_V*(2*M_PI)/60;
 					continue;
 				}
@@ -74,7 +74,7 @@ void *receive_func(void* param)  //接收线程。
 					motor_i = rec[j].ID-385;
 					shengjiang_P = (rec[j].Data[0] << 0) | (rec[j].Data[1] << 8) | (rec[j].Data[2] << 16) | (rec[j].Data[3] << 24);
 					shengjiang_V = (rec[j].Data[4] << 0) | (rec[j].Data[5] << 8) | (rec[j].Data[6] << 16) | (rec[j].Data[7] << 24);		
-					pvfeedback_data.positoion[motor_i]=shengjiang_P*(2*M_PI)/pow(2,16);
+                    pvfeedback_data.position[motor_i]=shengjiang_P*(2*M_PI)/pow(2,16);
 					pvfeedback_data.velocity[motor_i]=shengjiang_V*(2*M_PI)/60;
 					continue;
 				}
@@ -376,8 +376,8 @@ Motor zhuoyu_3(MotorType::ZHUOYU,0x603,0x203,20);
 Motor_Vector[2]=zhuoyu_3;
 Motor hangkong_1(MotorType::HAOKONG,0x604,0x204,16);
 Motor_Vector[3]=hangkong_1;
-// Motor evo_1(MotorType::EVO,0x005);
-Motor evo_1(MotorType::EVO,0x001);
+ Motor evo_1(MotorType::EVO,0x005);
+
 Motor_Vector[4]=evo_1;
 Motor hangkong_2(MotorType::HAOKONG,0x606,0x206,16);
 Motor_Vector[5]=hangkong_2;
@@ -448,7 +448,7 @@ for(int v_m = 0;v_m<12;v_m++)
 			int aa=Motor_Vector[v_m].getData(iii);
 			std::cout<<aa<<" ";
 		}
-		std::cout<<std::endl;
+//		std::cout<<std::endl;
 		// std::cout<<Motor_Vector[v_m].getFrame()<<std::endl;
 		}
 	}

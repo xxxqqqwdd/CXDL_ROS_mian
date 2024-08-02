@@ -29,29 +29,28 @@ public:
 	MainWindow(int argc, char** argv, QWidget *parent = 0);
 	~MainWindow();
 
-
-
-
-
-    //my
+     void initUI();
     void initslots();
 
 private slots:
+    void motor_feedback_cb_slot(cx_driver::feedback*);
 
-
-    void on_ceshi_clicked();
-    void motor_feedback_cb_slot(const cx_driver::feedback::ConstPtr& msg_p);
+    void on_btn_ceshi_clicked();
 
 Q_SIGNALS:
 
-
-
-
+signals:
+    void moter_ceshi(int a);
 
 
 private:
 	Ui::MainWindowDesign ui;
-	QNode qnode;
+	QNode qnode; 
+
+    QLabel *stamp;
+    QLabel *stamp_name;
+
+
 };
 
 

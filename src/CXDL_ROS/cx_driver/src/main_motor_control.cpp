@@ -25,7 +25,7 @@ int main(int argc,char *argv[])
 	//程序初始化
 	init(nh);
 	//初始化CAN卡
-//    initCANConfig(nh);
+    initCANConfig(nh);
 	//初始化电机
 	initMotorConfig(nh);
 	//初始化SDO/PDO

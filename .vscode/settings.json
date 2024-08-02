@@ -118,5 +118,6 @@
         "boundingbox": "cpp",
         "boundingsphere": "cpp",
         "timer": "cpp"
-    }
+    },
+    "cmake.ignoreCMakeListsMissing": true
 }

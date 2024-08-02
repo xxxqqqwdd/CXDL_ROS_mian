@@ -41,18 +41,16 @@ QNode::~QNode() {
 
 bool QNode::init() {
 
-    std::cout<<"ddddddd2"<<std::endl;
-  ros::init(init_argc,init_argv,"cx_qt_node");
-	if ( ! ros::master::check() ) {
-		return false;
-	}
+    msg =new cx_driver::feedback;
+
+    ros::init(init_argc,init_argv,"cx_qt_node");
+
 	ros::start(); // explicitly needed since our nodehandle is going out of scope.
-  ros::NodeHandle nh;
+    ros::NodeHandle nh;
 
-std::cout<<"ddddddd3"<<std::endl;
-  sub_motor_feedback_info=nh.subscribe<cx_driver::feedback>("/motor_feedback",10,&QNode::motor_feedback_cb,this);
 
-std::cout<<"ddddddd4"<<std::endl;
+    sub_motor_feedback_info=nh.subscribe<cx_driver::feedback>("/motor_feedback",10,&QNode::motor_feedback_cb,this);
+    pub_angle_info= nh.advertise<cx_driver::joint_angle>("joint_angle",10);
     start();
 
 	return true;
@@ -60,15 +58,18 @@ std::cout<<"ddddddd4"<<std::endl;
 
 
 
-void QNode::motor_feedback_cb(const cx_driver::feedbackConstPtr& msg_p)
+void QNode::motor_feedback_cb(const cx_driver::feedback::ConstPtr& msg_p)
 
 {
 
     // 当接收到电机反馈时，发射信号
 
-    emit motorFeedbackReceived(msg_p);
+    msg->stamp=msg_p->stamp;
+    msg->position=msg_p->position;
+    msg->velocity=msg_p->velocity;
+    msg->torque=msg_p->torque;
 
-    std::cout << "Received motor feedback" << std::endl;
+    emit motorFeedbackReceived(msg);
 
 }
 
@@ -76,6 +77,22 @@ void QNode::motor_feedback_cb(const cx_driver::feedbackConstPtr& msg_p)
 void QNode::ros_launch_start()
 {
     system("gnome-terminal -x bash -c 'source /home/u/CXDL/code/git/CXDL_ROS_main/devel/setup.bash; roslaunch cx_driver cx_driver.launch'&");
+}
+
+void QNode::moter_ceshi_(int a)
+{
+
+
+    ros::Rate loop_rate(100);
+
+    for (int i=0;i<3141;i++){
+        double angle_1=sin(i/1000.0)*M_PI / 3;
+        angles.left_arm_joint[a-1]= angle_1;
+        pub_angle_info.publish(angles);
+        loop_rate.sleep();
+        std::cout<<"tttttttttttttttttt"<<std::endl;
+    }
+
 }
 
 
