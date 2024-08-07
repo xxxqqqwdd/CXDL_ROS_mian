@@ -12,6 +12,8 @@
 #include <QtGui>
 #include <QApplication>
 #include "../include/cx_qt/main_window.hpp"
+//#include "../../../devel/include/cx_driver/joint_angle.h"
+
 
 /*****************************************************************************
 ** Main
@@ -26,6 +28,9 @@ int main(int argc, char **argv) {
     QApplication app(argc, argv);
     QTextCodec* code = QTextCodec::codecForName("GBK");
     QTextCodec::setCodecForLocale(code);
+
+    qRegisterMetaType<cx_driver::joint_angle>("cx_driver::joint_angle");
+
 
 
 

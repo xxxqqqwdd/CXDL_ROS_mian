@@ -4,7 +4,7 @@
 
 #include "cx_driver/controlcan.h"
 
-enum class MotorType {EVO,ZHUOYU,HAOKONG};
+enum class MotorType {EVO,ZHUOYU,HAOKONG,SHENGJIANG,DIPAN};
 
 class Frame
 {
@@ -37,6 +37,7 @@ class Motor : public Frame
     public:
         Motor();
         Motor(MotorType motortype,int sdo_id,int pdo_id,int encoding_rate);
+        Motor(MotorType motortype,int sdo_id,int pdo_id);
         Motor(MotorType motortype,int sdo_id);
         ~Motor();
         void setSdoID(int sdo_id);
@@ -78,7 +79,14 @@ class HAOKONG_MOTOR :public Motor
 {
     
 };
-
+class SHENGJIANG_MOTOR :public Motor
+{
+    
+};
+class DIPAN_MOTOR :public Motor
+{
+    
+};
 
 
 DWORD receive(DWORD DevType, DWORD DevIndex, DWORD CANIndex,PVCI_CAN_OBJ pReceive, ULONG Len, INT WaitTime);

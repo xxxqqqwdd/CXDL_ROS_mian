@@ -28,16 +28,13 @@ int main(int argc,char *argv[])
     initCANConfig(nh);
 	//初始化电机
 	initMotorConfig(nh);
-	//初始化SDO/PDO
-    initCANOPENSdo(nh);
 	//启动NMT
 	startNMT();
+	//初始化SDO/PDO
+    initCANOPENSdo(nh);
+
 	
-
-
-
     ros::Timer sync_interval_Timer = nh.createTimer(ros::Duration(CAN_sync_interval/1000), motor_timer_callback);
-
 	ros::Timer feedback_Timer = nh.createTimer(ros::Duration(feedback_interval/1000), feedback_callback);
 
     pub_frame_info= nh.advertise<cx_driver::motor_info>("motor_frame_info",10);

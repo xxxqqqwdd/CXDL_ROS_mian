@@ -16,6 +16,10 @@
 #include <std_msgs/String.h>
 #include <sstream>
 #include "../include/cx_qt/qnode.hpp"
+#include "std_msgs/Bool.h"
+
+#include <QThreadPool>
+
 
 /*****************************************************************************
 ** Namespaces
@@ -46,11 +50,7 @@ bool QNode::init() {
     ros::init(init_argc,init_argv,"cx_qt_node");
 
 	ros::start(); // explicitly needed since our nodehandle is going out of scope.
-    ros::NodeHandle nh;
 
-
-    sub_motor_feedback_info=nh.subscribe<cx_driver::feedback>("/motor_feedback",10,&QNode::motor_feedback_cb,this);
-    pub_angle_info= nh.advertise<cx_driver::joint_angle>("joint_angle",10);
     start();
 
 	return true;
@@ -71,7 +71,9 @@ void QNode::motor_feedback_cb(const cx_driver::feedback::ConstPtr& msg_p)
 
     emit motorFeedbackReceived(msg);
 
+
 }
+
 
 //启动电机
 void QNode::ros_launch_start()
@@ -79,29 +81,43 @@ void QNode::ros_launch_start()
     system("gnome-terminal -x bash -c 'source /home/u/CXDL/code/git/CXDL_ROS_main/devel/setup.bash; roslaunch cx_driver cx_driver.launch'&");
 }
 
-void QNode::moter_ceshi_(int a)
+void QNode::moter_ceshi_launch_slot(cx_driver::joint_angle angles)
 {
+    pub_angle_info.publish(angles);
+}
 
+//电机使能
+void QNode::on_btn_motorenable_clicked_slot()
+{
+    std_msgs::Bool motor_status_true;
+    motor_status_true.data=true;
+    sub_motor_status.publish(motor_status_true);
+}
 
-    ros::Rate loop_rate(100);
-
-    for (int i=0;i<3141;i++){
-        double angle_1=sin(i/1000.0)*M_PI / 3;
-        angles.left_arm_joint[a-1]= angle_1;
-        pub_angle_info.publish(angles);
-        loop_rate.sleep();
-        std::cout<<"tttttttttttttttttt"<<std::endl;
-    }
-
+//电机失能
+void QNode::on_btn_motordisable_clicked_slot()
+{
+    std_msgs::Bool motor_status_false;
+    motor_status_false.data=false;
+    sub_motor_status.publish(motor_status_false);
 }
 
 
 
 void QNode::run() {
 
+    ros::NodeHandle nh;
 
+    //电机反馈
+    sub_motor_feedback_info=nh.subscribe<cx_driver::feedback>("/motor_feedback",10,&QNode::motor_feedback_cb,this);
 
-ros::spin();
+    //发送角度
+    pub_angle_info= nh.advertise<cx_driver::joint_angle>("/joint_angle",10);
+
+    //电机使能
+    sub_motor_status = nh.advertise<std_msgs::Bool>("/motor_status",10);
+
+    ros::spin();
 }
 
 void QNode::log( const LogLevel &level, const std::string &msg) {

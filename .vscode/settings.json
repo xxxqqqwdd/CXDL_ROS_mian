@@ -117,7 +117,8 @@
         "viewport": "cpp",
         "boundingbox": "cpp",
         "boundingsphere": "cpp",
-        "timer": "cpp"
+        "timer": "cpp",
+        "future": "cpp"
     },
     "cmake.ignoreCMakeListsMissing": true
 }

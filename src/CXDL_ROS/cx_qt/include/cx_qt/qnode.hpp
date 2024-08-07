@@ -68,7 +68,15 @@ public:
 public slots:
     //my
     void ros_launch_start();
-    void moter_ceshi_(int a);
+    void moter_ceshi_launch_slot(cx_driver::joint_angle angles);
+
+    //电机使能
+    void on_btn_motorenable_clicked_slot();
+
+    //电机失能
+    void on_btn_motordisable_clicked_slot();
+
+
 
 
 signals:
@@ -95,6 +103,8 @@ Q_SIGNALS:
 
 
 private:
+
+
 	int init_argc;
 	char** init_argv;
     QStringListModel logging_model;
@@ -102,6 +112,10 @@ private:
     ros::Subscriber sub_motor_feedback_info ;
     //发送角度
     ros::Publisher pub_angle_info;
+    //电机使能
+    ros::Publisher sub_motor_status;
+
+
     //电机反馈_用于传递参数
     cx_driver::feedback* msg;
 

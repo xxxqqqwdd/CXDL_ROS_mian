@@ -10,5 +10,6 @@
         "/opt/ros/noetic/lib/python3/dist-packages",
         "/opt/openrobots/lib/python3.8/site-packages",
         "/home/u/3_my_lib/raisimLib/raisim/linux/lib"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "disabled"
 }
