@@ -21,7 +21,7 @@
 
 
 #include "../../../devel/include/cx_driver/feedback.h"
-#include "../../../devel/include/cx_driver/joint_angle.h"
+#include "../../../devel/include/cx_driver/joint_angle_08.h"
 
 
 /*****************************************************************************
@@ -68,13 +68,16 @@ public:
 public slots:
     //my
     void ros_launch_start();
-    void moter_ceshi_launch_slot(cx_driver::joint_angle angles);
+    void moter_ceshi_launch_slot(cx_driver::joint_angle_08 angles);
 
     //电机使能
     void on_btn_motorenable_clicked_slot();
 
     //电机失能
     void on_btn_motordisable_clicked_slot();
+
+    //控制升降
+    void on_btn_set_H_clicked_slot(double s);
 
 
 
@@ -113,13 +116,18 @@ private:
     //发送角度
     ros::Publisher pub_angle_info;
     //电机使能
-    ros::Publisher sub_motor_status;
+    ros::Publisher pub_motor_status;
+
 
 
     //电机反馈_用于传递参数
     cx_driver::feedback* msg;
 
-    cx_driver::joint_angle angles;
+    //发送的各关节角度
+    cx_driver::joint_angle_08 angles;
+
+    //是否将要发送的角度初始化为反馈
+    bool is_joint_inited;
 };
 
 

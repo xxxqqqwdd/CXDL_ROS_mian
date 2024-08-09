@@ -67,26 +67,7 @@ class Motor : public Frame
 
 };
 
-class EVO_MOTOR :public Motor
-{
 
-};
-class ZHUOYU_MOTOR :public Motor
-{
-    
-};
-class HAOKONG_MOTOR :public Motor
-{
-    
-};
-class SHENGJIANG_MOTOR :public Motor
-{
-    
-};
-class DIPAN_MOTOR :public Motor
-{
-    
-};
 
 
 DWORD receive(DWORD DevType, DWORD DevIndex, DWORD CANIndex,PVCI_CAN_OBJ pReceive, ULONG Len, INT WaitTime);

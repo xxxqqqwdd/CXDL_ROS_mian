@@ -35,6 +35,7 @@ MainWindow::MainWindow(int argc, char** argv, QWidget *parent)
 	, qnode(argc,argv)
 {
 	ui.setupUi(this); // Calling this incidentally connects all ui's triggers to on_...() callbacks in this class.
+
     initUI();
     initThread();
     initslots();
@@ -47,6 +48,7 @@ MainWindow::~MainWindow() {}
 
 void MainWindow::initUI()
 {
+    //时间戳
     stamp_name = new QLabel;
     stamp = new QLabel;
     stamp_name->setFixedSize(60, 20);
@@ -54,6 +56,41 @@ void MainWindow::initUI()
     ui.statusbar->addWidget((stamp_name));
     ui.statusbar->addWidget((stamp));
 
+    //单选按钮组
+    m_btnGroup1 = new QButtonGroup;
+
+    m_btnGroup1->addButton(ui.rBtn_v1,1);
+    m_btnGroup1->addButton(ui.rBtn_v2,2);
+    m_btnGroup1->addButton(ui.rBtn_v3,3);
+    m_btnGroup1->addButton(ui.rBtn_v4,4);
+    m_btnGroup1->addButton(ui.rBtn_v5,5);
+    m_btnGroup1->addButton(ui.rBtn_v6,6);
+    m_btnGroup1->addButton(ui.rBtn_v7,7);
+    m_btnGroup1->addButton(ui.rBtn_v8,8);
+    m_btnGroup1->addButton(ui.rBtn_v9,9);
+    m_btnGroup1->addButton(ui.rBtn_v10,10);
+    m_btnGroup1->addButton(ui.rBtn_v11,11);
+    m_btnGroup1->addButton(ui.rBtn_v12,12);
+    m_btnGroup1->addButton(ui.rBtn_acc1,1);
+    m_btnGroup1->addButton(ui.rBtn_acc2,2);
+    m_btnGroup1->addButton(ui.rBtn_acc3,3);
+    m_btnGroup1->addButton(ui.rBtn_acc4,4);
+    m_btnGroup1->addButton(ui.rBtn_acc6,6);
+    m_btnGroup1->addButton(ui.rBtn_acc7,7);
+    m_btnGroup1->addButton(ui.rBtn_acc8,8);
+    m_btnGroup1->addButton(ui.rBtn_acc9,9);
+    m_btnGroup1->addButton(ui.rBtn_acc10,10);
+    m_btnGroup1->addButton(ui.rBtn_acc12,12);
+    m_btnGroup1->addButton(ui.rBtn_dec1,1);
+    m_btnGroup1->addButton(ui.rBtn_dec2,2);
+    m_btnGroup1->addButton(ui.rBtn_dec3,3);
+    m_btnGroup1->addButton(ui.rBtn_dec4,4);
+    m_btnGroup1->addButton(ui.rBtn_dec6,6);
+    m_btnGroup1->addButton(ui.rBtn_dec7,7);
+    m_btnGroup1->addButton(ui.rBtn_dec8,8);
+    m_btnGroup1->addButton(ui.rBtn_dec9,9);
+    m_btnGroup1->addButton(ui.rBtn_dec10,10);
+    m_btnGroup1->addButton(ui.rBtn_dec12,12);
 
 }
 
@@ -62,6 +99,7 @@ void MainWindow::initslots()
 {
 
     connect(ui.btn_start ,SIGNAL(clicked()),&qnode,SLOT(ros_launch_start()));
+//    connect(ui.btn_start_1 ,SIGNAL(clicked()),&qnode,SLOT(ros_launch_start()));
 
     //电机反馈
     connect(&qnode, &QNode::motorFeedbackReceived, this, &MainWindow::motor_feedback_cb_slot);
@@ -73,13 +111,16 @@ void MainWindow::initslots()
     connect(this,&MainWindow::on_btn_motordisable_clicked_signal,&qnode,&QNode::on_btn_motordisable_clicked_slot);
 
     //启动线程
-    connect(this,&MainWindow::thread_start,motor_thread,&MyMotorThread::motor_working);
+    connect(this,&MainWindow::thread_start_t4,motor_thread,&MyMotorThread::motor_working);
 
     //线程处理完角度给qnode
     connect(motor_thread,&MyMotorThread::moter_ceshi_launch_signal,&qnode,&QNode::moter_ceshi_launch_slot);
 
+    //01模式控制升降
+    connect(this,&MainWindow::on_btn_set_H_clicked_signal,&qnode,&QNode::on_btn_set_H_clicked_slot);
 
-
+    //按钮组
+    connect(m_btnGroup1,SIGNAL(bool checked),this,SLOT(set_param()));
 
 }
 
@@ -88,13 +129,20 @@ void MainWindow::initslots()
 void MainWindow::initThread()
 {
     motor_thread = new MyMotorThread;
+    body1_thread = new MyMotorThread;
+    body2_thread = new MyMotorThread;
+    body3_thread = new MyMotorThread;
      t1 = new QThread;
+     t2 = new QThread;
+     t3 = new QThread;
+     t4 = new QThread;
 
-    motor_thread->moveToThread(t1);
 
+    body1_thread->moveToThread(t1);
+    body2_thread->moveToThread(t2);
+    body3_thread->moveToThread(t3);
+    motor_thread->moveToThread(t4);
 }
-
-
 
 
 void MainWindow::motor_feedback_cb_slot(cx_driver::feedback* msg)
@@ -139,6 +187,22 @@ void MainWindow::motor_feedback_cb_slot(cx_driver::feedback* msg)
     ui.lineEdit_joint206_2->setText(QString::number(msg->velocity[11],'f',6));
     ui.lineEdit_joint206_3->setText(QString::number(msg->torque[11],'f',6));
 
+
+    //升降架
+    double L1= msg->position[12];
+    double L2= msg->position[13];
+    double H1=sin(0.5*M_PI-acos((255625-pow((505.5937-L1),2))/75000))*500;
+    double H2=sin(0.5*M_PI-acos((255625-pow((505.5937-L2),2))/75000))*500;
+    ui.lineEdit_shengjiang_L1->setText(QString::number(L1,'f',6));
+    ui.lineEdit_shengjiang_L2->setText(QString::number(L2,'f',6));
+    ui.lineEdit_shengjiang_H->setText(QString::number(H1+H2+155+85,'f',6));
+
+    //里程计
+    ui.lineEdit_mileage_left->setText(QString::number(msg->mileage[0],'f',6));
+    ui.lineEdit_mileage_right->setText(QString::number(msg->mileage[1],'f',6));
+
+
+
     stamp_name->setText(QString::asprintf("时间戳："));
     stamp->setText(QString::asprintf("%f",msg->stamp.toSec()));
 
@@ -149,9 +213,11 @@ void MainWindow::motor_feedback_cb_slot(cx_driver::feedback* msg)
 
 void MainWindow::on_btn_ceshi_clicked()
 {
+
+
     uint a = ui.comboBox_motorid->currentText().toUInt();
-    emit thread_start(a);
-    t1->start();
+    emit thread_start_t4(a);
+    t4->start();
 }
 
 //电机使能
@@ -164,5 +230,18 @@ void MainWindow::on_btn_motorenable_clicked()
 void MainWindow::on_btn_motordisable_clicked()
 {
     emit on_btn_motordisable_clicked_signal();
+}
+
+//控制升降
+void MainWindow::on_btn_set_H_clicked()
+{
+    double s = ui.lineEdit_shengjiang_set_H->text().toDouble();
+
+    emit on_btn_set_H_clicked_signal(s);
+}
+
+void MainWindow::set_param()
+{
+    qDebug()<<"wwwwwwwwwwwwww";
 }
 

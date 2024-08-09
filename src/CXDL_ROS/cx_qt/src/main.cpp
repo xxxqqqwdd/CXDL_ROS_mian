@@ -12,7 +12,7 @@
 #include <QtGui>
 #include <QApplication>
 #include "../include/cx_qt/main_window.hpp"
-//#include "../../../devel/include/cx_driver/joint_angle.h"
+//#include "../../../devel/include/cx_driver/joint_angle_08.h"
 
 
 /*****************************************************************************
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
     QTextCodec* code = QTextCodec::codecForName("GBK");
     QTextCodec::setCodecForLocale(code);
 
-    qRegisterMetaType<cx_driver::joint_angle>("cx_driver::joint_angle");
+    qRegisterMetaType<cx_driver::joint_angle_08>("cx_driver::joint_angle_08");
 
 
 

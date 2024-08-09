@@ -5,7 +5,7 @@
 #include <QRunnable>
 #include <QDebug>
 #include <ros/ros.h>
-#include "../../../devel/include/cx_driver/joint_angle.h"
+#include "../../../devel/include/cx_driver/joint_angle_08.h"
 
 
 
@@ -19,7 +19,7 @@ public:
 
 
 signals:
-    void moter_ceshi_launch_signal(cx_driver::joint_angle angles);
+    void moter_ceshi_launch_signal(cx_driver::joint_angle_08 angles);
 
 public slots:
     void motor_working(uint a);
@@ -30,7 +30,7 @@ private:
     uint m_motorid;
 
     //
-    cx_driver::joint_angle angles1;
+    cx_driver::joint_angle_08 angles1;
 
 };
 

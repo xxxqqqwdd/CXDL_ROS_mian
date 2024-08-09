@@ -50,8 +50,12 @@ find_package(catkin REQUIRED COMPONENTS
 add_message_files(
   FILES
   motor_info.msg
-  joint_angle.msg
   feedback.msg
+  joint_angle_01.msg
+  joint_angle_08.msg
+  shengjiang_01.msg
+  dipan.msg
+
 )
 
 ## Generate services in the 'srv' folder

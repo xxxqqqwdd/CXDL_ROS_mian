@@ -11,6 +11,7 @@
 #include "qnode.hpp"
 #include "mymotorthread.h"
 #include <QThread>
+#include <QButtonGroup>
 
 /*****************************************************************************
 ** Namespace
@@ -50,7 +51,10 @@ private slots:
     //电机失能能
     void on_btn_motordisable_clicked();
 
+    void on_btn_set_H_clicked();
 
+    //配置参数_1
+    void set_param();
 
 
 Q_SIGNALS:
@@ -62,9 +66,20 @@ signals:
     //电机失能
     void on_btn_motordisable_clicked_signal();
 
-    //启动线程
-    void thread_start(uint a);
+    //启动线程t1
+    void thread_start_t1();
 
+    //启动线程t2
+    void thread_start_t2();
+
+    //启动线程t3
+    void thread_start_t3();
+
+    //启动线程t4
+    void thread_start_t4(uint a);
+
+    //控制升降
+    void on_btn_set_H_clicked_signal(double s);
 
 private:
 	Ui::MainWindowDesign ui;
@@ -75,7 +90,18 @@ private:
 
     //电机线程
      MyMotorThread* motor_thread;
+     MyMotorThread* body1_thread;
+     MyMotorThread* body2_thread;
+     MyMotorThread* body3_thread;
      QThread* t1;
+     QThread* t2;
+     QThread* t3;
+     QThread* t4;
+
+
+     //单选按钮组
+     QButtonGroup *m_btnGroup1;
+
 
 
 

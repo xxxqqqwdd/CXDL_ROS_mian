@@ -118,7 +118,10 @@
         "boundingbox": "cpp",
         "boundingsphere": "cpp",
         "timer": "cpp",
-        "future": "cpp"
+        "future": "cpp",
+        "bufferobject": "cpp",
+        "texture": "cpp",
+        "buffered_value": "cpp"
     },
     "cmake.ignoreCMakeListsMissing": true
 }
